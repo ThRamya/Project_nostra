@@ -42,6 +42,7 @@ if(isset($_POST['add_to_cart']))
                         'image' => $product_image,
                         'description' => $product_description,
                         'quantity' => 1
+                        
                   ]; 
             }
             // Redirect to avoid form resubmission on refresh
@@ -67,7 +68,7 @@ if(isset($_POST['add_to_cart']))
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <!--My Css-->
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="images/N.jpg">
+    <link rel="icon" href="images/N_n.jpg">
     <!--font awesome Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -141,7 +142,7 @@ if(isset($_POST['add_to_cart']))
                         <p>₹<?=number_format($row['price'], 2); ?></p>
                         <p><?=$row['description']; ?></p>
 
-                    </div>
+                    </div> 
                 </a>
                       
                         <form method="post" class="add-to-cart-container">
@@ -169,9 +170,9 @@ if(isset($_POST['add_to_cart']))
                         <p>Providing premium fashion and lifestyle products for every style enthusiast.</p>
 
                         <div class="footer-box-1">
-                            <i class="fa-brands fa-instagram" style="color:#ffffff;"></i>
-                            <i class="fa-brands fa-twitter" style="color:#ffffff;"></i>
-                            <i class="fa-brands fa-facebook" style="color:#ffffff;"></i>
+                           <i class="fa-brands fa-instagram" style="color:#E1306C;"></i>
+                           <i class="fa-brands fa-twitter" style="color:#1DA1F2;"></i>
+                           <i class="fa-brands fa-facebook" style="color:#1877F2;"></i>
                         </div>
                 </div>
 

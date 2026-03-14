@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
     <title>Add Product</title>
-    <link rel="icon" href="images/N.jpg">
+     <link rel="icon" href="images/N_n.jpg">
     <style>
      body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
+            background: #e8fff5;
+
             
         }
 
         form {
-            background-color: #ffffff; /* pure white form */
+            background: #b2f2d7;
+            background-color: ; /* pure white form */
             padding: 25px 30px;
             border-radius: 10px;
             width: 350px;
@@ -50,7 +53,7 @@
         input[type="submit"] {
             width: 100%;
             padding: 12px;
-            background-color: #b17272; /* soft green */
+            background-color: #2e5a47; /* soft green */
             border: none;
             border-radius: 5px;
             color: white;
@@ -59,7 +62,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #7a5c71; /* darker green on hover */
+            background-color: #0dd280; /* darker green on hover */
         }
 
         @media (max-width: 400px) {

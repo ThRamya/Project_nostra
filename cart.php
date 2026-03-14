@@ -18,7 +18,7 @@ $total = 0;
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <!--My Css-->
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="images/N.jpg">
+    <link rel="icon" href="images/N_n.jpg">
     <!--font awesome Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -27,7 +27,8 @@ $total = 0;
 
 body{
 font-family:Poppins, sans-serif;
-background:#f5f5f5;
+/* background:#f5f5f5; */
+ background: #e8fff5;
 margin:0;
 }
 
@@ -209,73 +210,73 @@ font-weight:bold;
 
 <?php if(empty($cart)): ?>
 
-<p style="text-align:center;">Your cart is empty.</p>
+        <p style="text-align:center;">Your cart is empty.</p>
 
 <?php else: ?>
 
-<div class="cart-container">
+    <div class="cart-container">
 
-<?php foreach($cart as $id => $product):
+        <?php foreach($cart as $id => $product):
 
-$price = $product['price'];
-$qty = $product['quantity'];
-$subtotal = $price * $qty;
-$total += $subtotal;
+        $price = $product['price'];
+        $qty = $product['quantity'];
+        $subtotal = $price * $qty;
+        $total += $subtotal;
 
-?>
+        ?>
 
-<div class="cart-item">
+        <div class="cart-item">
 
-<div class="cart-img">
-<img src="images/<?= $product['image']; ?>">
-</div>
+        <div class="cart-img">
+        <img src="images/<?= $product['image']; ?>">
+    </div>
 
-<div class="cart-info">
+    <div class="cart-info">
 
-<h3><?= $product['name']; ?></h3>
+        <h3><?= $product['name']; ?></h3>
 
-<p class="description">
-<?= isset($product['description']) ? $product['description'] : 'No description available.' ?>
-</p>
+        <p class="description">
+        <?= isset($product['description']) ? $product['description'] : 'No description available.' ?>
+        </p>
 
-<p class="stock">In stock</p>
-<p class="delivery">FREE delivery on first order</p>
+        <p class="stock">In stock</p>
+        <p class="delivery">FREE delivery on first order</p>
 
-<div class="qty-box">
+    <div class="qty-box">
 
-<a href="remove_from_cart.php?id=<?= $id ?>" class="delete-btn">
-<i class="fa-solid fa-trash"></i>
-</a>
+    <a href="remove_from_cart.php?id=<?= $id ?>" class="delete-btn">
+    <i class="fa-solid fa-trash"></i>
+    </a>
 
-<form method="post" action="update_cart.php" style="display:inline;">
-    <input type="hidden" name="product_id" value="<?= $id ?>">
-    <button type="submit" name="decrease" class="minus-btn">-</button>
-</form>
+    <form method="post" action="update_cart.php" style="display:inline;">
+        <input type="hidden" name="product_id" value="<?= $id ?>">
+        <button type="submit" name="decrease" class="minus-btn">-</button>
+    </form>
 
-<span class="qty"><?= $qty ?></span>
+    <span class="qty"><?= $qty ?></span>
 
-<form method="post" action="update_cart.php" style="margin:0;">
-<input type="hidden" name="product_id" value="<?= $id ?>">
-<button type="submit" name="increase" class="plus-btn">+</button>
-</form>
+    <form method="post" action="update_cart.php" style="margin:0;">
+        <input type="hidden" name="product_id" value="<?= $id ?>">
+        <button type="submit" name="increase" class="plus-btn">+</button>
+    </form>
 
-</div>
+    </div>
 
-</div>
+    </div>
 
-<div class="cart-price">
-₹<?= $price ?>
-</div>
+    <div class="cart-price">
+          ₹<?= $price ?>
+    </div>
 
-</div>
+    </div>
 
-<?php endforeach; ?>
+    <?php endforeach; ?>
 
-<h2 class="subtotal">
-Subtotal: ₹<?= $total ?>
-</h2>
+    <h2 class="subtotal">
+            Subtotal: ₹<?= $total ?>
+    </h2>
 
-</div>
+    </div>
 
 <?php endif; ?>
 </div>
@@ -290,9 +291,9 @@ Subtotal: ₹<?= $total ?>
                             interest</p>
 
                         <div class="footer-box-1">
-                            <i class="fa-brands fa-instagram" style="color:#ffffff;"></i>
-                            <i class="fa-brands fa-twitter" style="color:#ffffff;"></i>
-                            <i class="fa-brands fa-facebook" style="color:#ffffff;"></i>
+                            <i class="fa-brands fa-instagram" style="color:#E1306C;"></i>
+                            <i class="fa-brands fa-twitter" style="color:#1DA1F2;"></i>
+                            <i class="fa-brands fa-facebook" style="color:#1877F2;"></i>
                         </div>
                 </div>
 

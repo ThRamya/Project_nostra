@@ -11,7 +11,7 @@ if(isset($_POST['add_to_cart']))
         $product_name= $_POST['product_name'];
         $product_price= $_POST['product_price'];
         $product_image= $_POST['product_image'];
-        $product_description = $_POST['product_description'];
+        $product_description = $_POST['product_description']; 
 
         // Check if the cart exists in session
          if(!isset($_SESSION['cart'])){
@@ -66,7 +66,7 @@ if(isset($_POST['add_to_cart']))
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <!--My Css-->
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="images/N.jpg">
+    <link rel="icon" href="images/N_n.jpg">
     <!--font awesome Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="

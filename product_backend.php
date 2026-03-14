@@ -9,5 +9,5 @@ $result=mysqli_query($conn,$sql);
 
 $product=mysqli_fetch_assoc($result);
 
-include("product_view.php")
+include("product_view.php");
 ?>

@@ -88,7 +88,19 @@ document.getElementById("contact-form").addEventListener("submit",function(e)
         method:"POST",
         body:form_data
     })
-    window.location.href = "success.html"; 
+    .then(response=>response.text())
+    .then(data=>{
+        if(data==="success")
+        {
+             window.location.href = "success.html"; 
+        }
+        else
+        {
+            alert("Error Saving your message!");
+        }
+    })
+    .catch(error=>alert("Network erro!"));
+   
 }
 });
     
