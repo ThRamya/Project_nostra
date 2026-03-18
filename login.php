@@ -14,14 +14,34 @@ if(isset($_POST['login']))
    $result=mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) > 0)
    {
-
+       
         $user=mysqli_fetch_assoc($result);
 
-    if(password_verify($password,$user['password']))
-    {
+    if($user && password_verify($password,$user['password']))
+    {  
+        // --- Step 1: Set session variables ---
         $_SESSION['user_id']=$user['user_id'];
         $_SESSION['username']=$user['username'];
-        header("Location:index.html");
+
+        // --- Step 2: Merge session cart into DB ---
+            if(isset($_SESSION['cart'])) { // check if user added products before login
+                foreach($_SESSION['cart'] as $product_id => $item)
+                {
+                    $quantity = $item['quantity'];
+                    $user_id = $_SESSION['user_id'];
+
+                    $sql_merge = "INSERT INTO user_cart (user_id, product_id, quantity)
+                                  VALUES ($user_id, $product_id, $quantity)
+                                  ON DUPLICATE KEY UPDATE quantity = quantity + $quantity";
+
+                    $res=mysqli_query($conn,$sql_merge);
+                }
+                 // clear session cart after merging
+                unset($_SESSION['cart']);
+            }
+
+
+        header("Location:index.php");
         exit;
        
     }

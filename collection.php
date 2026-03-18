@@ -1,19 +1,26 @@
 <?php
 session_start();
-// unset($_SESSION['cart']);
+
+//unset($_SESSION['cart']);
 include("db.php");
 // echo "<pre>";
 // print_r($_SESSION['cart']);
 // echo "</pre>";
+
+// Initialize session cart
+$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+
+// Handle Add to Cart
 if(isset($_POST['add_to_cart']))
-    {
+    {   
+
         $product_id= $_POST['product_id'];
         $product_name= $_POST['product_name'];
         $product_price= $_POST['product_price'];
         $product_image= $_POST['product_image'];
         $product_description = $_POST['product_description'];
 
-        // Check if the cart exists in session
+        // Initialize session cart if not exists and check the cart is exist or not
          if(!isset($_SESSION['cart'])){
                $_SESSION['cart'] = []; // create an empty cart if not exists
          }
@@ -45,6 +52,21 @@ if(isset($_POST['add_to_cart']))
                         
                   ]; 
             }
+
+            // --- DB logic for signed-in users ---
+            if(isset($_SESSION['user_id']))
+                {
+                    $user_id=$_SESSION['user_id'];
+                    $quantity=$_SESSION['cart'][$product_id]['quantity']; // current quantity in session
+
+                    // Insert or update DB cart
+                    $sql="insert into user_cart(user_id,product_id,quantity) 
+                         values($user_id,$product_id,$quantity) 
+                         on duplicate key update quantity=$quantity";
+
+                    $result=mysqli_query($conn,$sql);
+                }
+
             // Redirect to avoid form resubmission on refresh
             header("Location: collection.php");
             exit();
@@ -81,27 +103,16 @@ if(isset($_POST['add_to_cart']))
     <nav class="navbar">
         <h1 class="nostra">Nostra</h1>
         <div class="navbar-links">
-            <p class="navbar-link"><a href="index.html">Home</a></p>
+            <p class="navbar-link"><a href="index.php">Home</a></p>
             <p class="navbar-link"><a href="collection.php">Collections</a></p>
             <p class="navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>
          <div class="navbar-cart">
             <a href="cart.php">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span class="cart-count">
-                    <?php
-                    $count=0;
-                    if(isset($_SESSION['cart']))
-                        {
-                        foreach($_SESSION['cart'] as $item)
-                            {
-                                $count += $item['quantity'];
-
-                            }
-                        }
-                        echo $count;
-                    ?>
-                </span>
+                <span class="cart-count">             
+              <?php include("cart_count.php"); ?>  
+                  </span>
             </a>
         </div>
         <div class="navbar-menu-toggle">
@@ -114,7 +125,7 @@ if(isset($_POST['add_to_cart']))
             <i class="fa-solid fa-xmark"></i>
         </p>
         <div class="side-navbar-links">
-            <p class="side-navbar-link"><a href="index.html">Home</a></p>
+            <p class="side-navbar-link"><a href="index.php">Home</a></p>
             <p class="side-navbar-link"><a href="collection.php">Collections</a></p>
             <p class="side-navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>

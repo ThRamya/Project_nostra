@@ -90,16 +90,21 @@ document.getElementById("contact-form").addEventListener("submit",function(e)
     })
     .then(response=>response.text())
     .then(data=>{
+        data = data.trim();
+        console.log("PHP response:", data); 
         if(data==="success")
         {
              window.location.href = "success.html"; 
         }
         else
         {
-            alert("Error Saving your message!");
+            alert("Error Saving your message! PHP response: " + data);
         }
     })
-    .catch(error=>alert("Network erro!"));
+    .catch(error=>{
+    console.error(error);
+    alert("Network error!");
+    });
    
 }
 });

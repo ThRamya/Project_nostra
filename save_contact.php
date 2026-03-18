@@ -10,10 +10,10 @@ $sql="insert into contact_messages(full_name,email,message) values('$fullname','
 $result=mysqli_query($conn,$sql); 
 
 if($result){
-    echo "data inserted";
+    echo "success";
 }
 else{
-    echo "not insert";
+    echo "error";
 }
 
 mysqli_close($conn);

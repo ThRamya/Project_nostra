@@ -1,7 +1,40 @@
 <?php
 session_start();
-$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+include("db.php");
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+
 $total = 0;
+$cart = [];
+if(isset($_SESSION['user_id'])){
+
+    $user_id = $_SESSION['user_id'];
+
+    $sql = "SELECT p.*, uc.quantity 
+            FROM user_cart uc
+            JOIN products p ON uc.product_id = p.id
+            WHERE uc.user_id = $user_id";
+
+    $result = mysqli_query($conn,$sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+      $cart[$row['id']] = [
+    'name' => $row['product_name'],
+    'price' => $row['price'],
+    'image' => $row['image'],
+    'description' => $row['description'],
+    'quantity' => $row['quantity']
+];
+    }
+
+}else{
+
+    if(isset($_SESSION['cart'])){
+        $cart = $_SESSION['cart'];
+    }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -156,7 +189,26 @@ margin-top:30px;
 font-size:26px;
 font-weight:bold;
 }
+/* My Orders Button */
+.my-orders-btn-container {
+    text-align: left;
+    margin-top: 20px;
+}
 
+.my-orders-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #10b981; /* Green */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.my-orders-btn:hover {
+    background-color: #059669;
+}
 </style>
 
 </head>
@@ -167,7 +219,7 @@ font-weight:bold;
     <nav class="navbar">
         <h1>Nostra</h1>
         <div class="navbar-links">
-            <p class="navbar-link"><a href="index.html">Home</a></p>
+            <p class="navbar-link"><a href="index.php">Home</a></p>
             <p class="navbar-link"><a href="collection.php">Collections</a></p>
             <p class="navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>
@@ -175,18 +227,7 @@ font-weight:bold;
             <a href="cart.php">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count">
-                    <?php
-                    $count=0;
-                    if(isset($_SESSION['cart']))
-                        {
-                        foreach($_SESSION['cart'] as $item)
-                            {
-                                $count += $item['quantity'];
-
-                            }
-                        }
-                        echo $count;
-                    ?>
+                   <?php include("cart_count.php"); ?>
                 </span>
             </a>
         </div>
@@ -200,7 +241,7 @@ font-weight:bold;
             <i class="fa-solid fa-xmark"></i>
         </p>
         <div class="side-navbar-links">
-            <p class="side-navbar-link"><a href="index.html">Home</a></p>
+            <p class="side-navbar-link"><a href="index.php">Home</a></p>
             <p class="side-navbar-link"><a href="collection.php">Collections</a></p>
             <p class="side-navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>
@@ -211,6 +252,12 @@ font-weight:bold;
 <?php if(empty($cart)): ?>
 
         <p style="text-align:center;">Your cart is empty.</p>
+              <!-- My Orders Button -->
+<?php if(isset($_SESSION['user_id'])): ?>
+    <div class="my-orders-btn-container" style="text-align:center;";>
+        <a href="my_orders.php" class="my-orders-btn" style= "background-color: #9ca7a4;">View My Orders</a>
+    </div>
+     <?php endif; ?>
 
 <?php else: ?>
 
@@ -276,10 +323,33 @@ font-weight:bold;
             Subtotal: ₹<?= $total ?>
     </h2>
 
+    <?php if(!empty($cart)): ?>
+    <div style="text-align:right; margin-top:20px;">
+        <form action="checkout.php" method="post">
+            <button type="submit" style="
+                padding: 10px 20px;
+                background-color: #10b981;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+            ">Proceed to Checkout</button>
+        </form>
+    </div>
+      <?php endif; ?>
+      <!-- My Orders Button -->
+<?php if(isset($_SESSION['user_id'])): ?>
+    <div class="my-orders-btn-container">
+        <a href="my_orders.php" class="my-orders-btn">View My Orders</a>
+    </div>
+<?php endif; ?>
     </div>
 
 <?php endif; ?>
+
 </div>
+
 
  <!--Footer-->
 

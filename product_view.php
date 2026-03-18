@@ -1,5 +1,12 @@
 <?php
 session_start();
+include("db.php");
+
+if(!isset($product)){
+    echo "Product not found";
+    exit();
+}
+
 //unset($_SESSION['cart']);
 include("db.php");
 // echo "<pre>";
@@ -78,7 +85,7 @@ if(isset($_POST['add_to_cart']))
     <nav class="navbar">
         <h1 class="nostra">Nostra</h1>
         <div class="navbar-links">
-            <p class="navbar-link"><a href="index.html">Home</a></p>
+            <p class="navbar-link"><a href="index.php">Home</a></p>
             <p class="navbar-link"><a href="collection.php">Collections</a></p>
             <p class="navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>
@@ -86,18 +93,7 @@ if(isset($_POST['add_to_cart']))
             <a href="cart.php">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-count">
-                    <?php
-                    $count=0;
-                    if(isset($_SESSION['cart']))
-                        {
-                        foreach($_SESSION['cart'] as $item)
-                            {
-                                $count += $item['quantity'];
-
-                            }
-                        }
-                        echo $count;
-                    ?>
+                   <?php include("cart_count.php"); ?>  
                 </span>
             </a>
         </div>
@@ -111,7 +107,7 @@ if(isset($_POST['add_to_cart']))
             <i class="fa-solid fa-xmark"></i>
         </p>
         <div class="side-navbar-links">
-            <p class="side-navbar-link"><a href="index.html">Home</a></p>
+            <p class="side-navbar-link"><a href="index.php">Home</a></p>
             <p class="side-navbar-link"><a href="collection.php">Collections</a></p>
             <p class="side-navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>

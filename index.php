@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,16 +31,34 @@
     <nav class="navbar">
         <h1 class="nostra">Nostra</h1>
         <div class="navbar-links">
-            <p class="navbar-link"><a href="index.html">Home</a></p>
+            <p class="navbar-link"><a href="index.php">Home</a></p>
             <p class="navbar-link"><a href="collection.php">Collections</a></p>
             <p class="navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>
     <!--Singin icon-->
         <div class="navbar-signin">
-            
-            <a href="login.php">
-                <i class="fa-solid fa-user"></i>Sign In
-            </a>
+            <?php
+                if(isset($_SESSION['username'])): 
+            ?>
+
+                <div class="user-dropdown">
+                    <button class="dropbtn">
+                        
+                            <i class="fa-solid fa-user"></i> Hello, <?= $_SESSION['username']; ?>
+                            <i class="fa-solid fa-caret-down"></i>
+                   </button>
+                        <div class="user-dropdown-content">
+                            <form method="post" action="logout.php" style="margin:0;">
+                                <button type="submit" class="logout-btn">Logout</button>
+                            </form>
+                </div>
+
+                    </div>
+            <?php else: ?>
+                     <a href="login.php">
+                      <i class="fa-solid fa-user"></i>Sign In
+                     </a>
+            <?php endif; ?>
         </div>
     <!--navbar-menu-toggle-->
         <div class="navbar-menu-toggle">
@@ -49,7 +71,7 @@
             <i class="fa-solid fa-xmark"></i>
         </p>
         <div class="side-navbar-links">
-            <p class="side-navbar-link"><a href="index.html">Home</a></p>
+            <p class="side-navbar-link"><a href="index.php">Home</a></p>
             <p class="side-navbar-link"><a href="collection.php">Collections</a></p>
             <p class="side-navbar-link"><a href="contact.html">Contact Us</a></p>
         </div>
@@ -68,7 +90,6 @@
                 src="images/mainpage.jpg" alt="Fashion 5">
         </div>
     </div>
-
 
     <!--service-->
     <div class="service">
